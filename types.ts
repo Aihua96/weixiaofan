@@ -14,6 +14,15 @@ export interface Education {
   details?: string;
 }
 
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  technologies: string[];
+  demoLink?: string;
+  repoLink?: string;
+}
+
 export interface ProfileState {
   imageUrl: string | null;
   loading: boolean;

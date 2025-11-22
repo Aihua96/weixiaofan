@@ -2,7 +2,7 @@ import React from 'react';
 import WaveBackground from './components/WaveBackground';
 import Typewriter from './components/Typewriter';
 import ProfileImage from './components/ProfileImage';
-import { Experience, Education } from './types';
+import { Experience, Education, Project } from './types';
 
 // Data Constants
 const EXPERIENCES: Experience[] = [
@@ -29,6 +29,31 @@ const EXPERIENCES: Experience[] = [
     period: '2019 - 2020',
     description: '参与特大桥梁的结构设计与计算。这段经历让我深刻理解了传统工程行业的痛点，为后续转型数字化产品奠定了坚实的行业认知基础。',
     tags: ['Civil Engineering', 'AutoCAD', 'Structural Analysis']
+  }
+];
+
+const PROJECTS: Project[] = [
+  {
+    id: 'p1',
+    title: 'AI Construction Safety Monitor',
+    description: 'A computer vision system utilizing YOLOv8 to detect PPE compliance (helmets, vests) on construction sites in real-time. Integrated with a notification service to alert site managers of safety violations.',
+    technologies: ['Python', 'PyTorch', 'YOLOv8', 'FastAPI', 'React'],
+    demoLink: '#',
+    repoLink: 'https://github.com/weixiaofan'
+  },
+  {
+    id: 'p2',
+    title: 'BIM-GPT Assistant',
+    description: 'An intelligent chatbot interface for querying IFC model data. Uses LangChain and RAG to allow non-technical stakeholders to ask questions like "Show me all windows on level 2 with area > 2m²".',
+    technologies: ['OpenAI API', 'LangChain', 'Neo4j', 'Three.js', 'TypeScript'],
+    repoLink: 'https://github.com/weixiaofan'
+  },
+  {
+    id: 'p3',
+    title: 'Urban Flood Risk Visualizer',
+    description: 'A WebGL-based visualization tool analyzing urban terrain and drainage capacity to simulate flood risks under different rainfall scenarios.',
+    technologies: ['Mapbox GL', 'Deck.gl', 'PostGIS', 'Vue.js'],
+    demoLink: '#'
   }
 ];
 
@@ -61,6 +86,7 @@ const App: React.FC = () => {
           <nav className="hidden md:flex gap-8 text-sm font-medium text-slate-500">
             <a href="#about" className="hover:text-blue-600 transition-colors">关于</a>
             <a href="#experience" className="hover:text-blue-600 transition-colors">经历</a>
+            <a href="#projects" className="hover:text-blue-600 transition-colors">项目</a>
             <a href="#contact" className="hover:text-blue-600 transition-colors">联系</a>
           </nav>
         </header>
@@ -142,6 +168,57 @@ const App: React.FC = () => {
                         {tag}
                       </span>
                     ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Projects Section */}
+        <section id="projects" className="mb-32">
+          <div className="flex flex-col md:flex-row gap-12">
+            <div className="md:w-1/3">
+              <h2 className="text-3xl font-bold mb-4">个人项目</h2>
+              <p className="text-slate-500 text-lg">
+                探索技术边界，将AI与行业场景结合的业余实践。
+              </p>
+            </div>
+            
+            <div className="md:w-2/3 grid md:grid-cols-2 gap-6">
+              {PROJECTS.map((project) => (
+                <div key={project.id} className="group relative bg-white/40 backdrop-blur-sm border border-slate-100 rounded-xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl -z-10" />
+                  
+                  <h3 className="text-xl font-bold text-slate-800 mb-3 group-hover:text-blue-600 transition-colors">
+                    {project.title}
+                  </h3>
+                  
+                  <p className="text-slate-600 text-sm leading-relaxed mb-6 min-h-[80px]">
+                    {project.description}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.technologies.map(tech => (
+                      <span key={tech} className="px-2 py-1 bg-white border border-slate-100 text-slate-500 text-xs font-medium rounded-md">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  <div className="flex items-center gap-4 mt-auto pt-4 border-t border-slate-100/50">
+                    {project.demoLink && (
+                      <a href={project.demoLink} target="_blank" rel="noopener noreferrer" className="flex items-center text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors">
+                        Live Demo 
+                        <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                      </a>
+                    )}
+                    {project.repoLink && (
+                      <a href={project.repoLink} target="_blank" rel="noopener noreferrer" className="flex items-center text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">
+                        GitHub
+                        <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path></svg>
+                      </a>
+                    )}
                   </div>
                 </div>
               ))}
