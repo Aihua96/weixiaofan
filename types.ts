@@ -1,3 +1,4 @@
+
 export interface Experience {
   id: string;
   role: string;
@@ -21,6 +22,10 @@ export interface Project {
   technologies: string[];
   demoLink?: string;
   repoLink?: string;
+  // Extended fields for detail view
+  fullDescription?: string;
+  background?: string;
+  features?: string[];
 }
 
 export interface ProfileState {
